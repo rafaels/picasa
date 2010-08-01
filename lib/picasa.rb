@@ -1,17 +1,24 @@
 require 'net/http'
 require 'xmlsimple'
-require 'picasa/web_albums'
-require 'picasa/config'
+
+require 'picasa/connection'
+require 'picasa/album'
+require 'picasa/photo'
 
 module Picasa
-  def self.albums(options = {})
-    web_albums = Picasa::WebAlbums.new(options[:google_user])
-    web_albums.albums
-  end
+  class User
+    def initialize(google_user)
+      raise ArgumentError.new("You must specify a google user")
+      @google_user = google_user
+    end
 
-  def self.photos(options = {})
-    raise ArgumentError.new("You must specify album_id") unless options[:album_id]
-    web_albums = Picasa::WebAlbums.new(options[:google_user])
-    web_albums.photos(options[:album_id])
+    def albums
+      @albums ||= Picasa::Album.all(@google_user)
+    end
+
+    def photos(options = {})
+      raise ArgumentError.new("You must specify album_id") unless options[:album_id]
+      Picasa::Photo.find_all_by_album_id(@google_user, options[:album_id])
+    end
   end
 end
