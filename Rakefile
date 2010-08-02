@@ -9,9 +9,9 @@ begin
     gem.name = "picasa"
     gem.description = %Q{Simple Google Picasa managment}
     gem.summary = %Q{simple google picasa managment}
-    gem.email = "w.wnetrzak@gmail.com"
-    gem.homepage = "http://github.com/morgoth/picasa"
-    gem.authors = ["Wojciech Wnętrzak"]
+    gem.email = "rafael@maisweb.org"
+    gem.homepage = "http://github.com/rafaels/picasa"
+    gem.authors = ["Wojciech Wnętrzak", "Rafael Souza", "Anderson Dias"]
     gem.add_dependency('xml-simple')
     gem.add_development_dependency 'test-unit', '>=2.0.6'
     gem.add_development_dependency 'fakeweb'
@@ -48,6 +48,7 @@ task :default => :test
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   if File.exist?('VERSION.yml')
+    require 'yaml'
     config = YAML.load(File.read('VERSION.yml'))
     version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
   else
