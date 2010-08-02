@@ -1,6 +1,6 @@
 module Picasa
   class Photo
-    attr_accessor :title, :thumbnail_1, :thumbnail_2, :thumbnail_3, :keywords, :src
+    attr_accessor :title, :thumbnail_1, :thumbnail_2, :thumbnail_3, :tags, :src
 
     def self.find_all_by_album_id(google_user, album_id)
       data = Picasa::Connection.stablish("/data/feed/api/user/#{google_user}/albumid/#{album_id}")
@@ -9,7 +9,7 @@ module Picasa
 
     def self.find_all_by_tags(google_user, tags)
       tags = tags.gsub(' ', '')
-      data = Picasa::Connection.stablish("/data/feed/api/user/#{google_user}/?kind=photo&tag=#{tags}")
+      data = Picasa::Connection.stablish("/data/feed/api/user/#{google_user}?kind=photo&tag=#{tags}")
       Photo.parse_all_xml(data)
     end
 
@@ -19,7 +19,7 @@ module Picasa
       photo.thumbnail_1 = xml_entry['group'][0]['thumbnail'][0]['url']
       photo.thumbnail_2 = xml_entry['group'][0]['thumbnail'][1]['url']
       photo.thumbnail_3 = xml_entry['group'][0]['thumbnail'][2]['url']
-      photo.keywords = xml_entry['group'][0]['keywords'][0]
+      photo.tags = xml_entry['group'][0]['keywords'][0]
       photo.src = xml_entry['content']['src']
       photo
     end
