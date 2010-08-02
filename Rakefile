@@ -6,7 +6,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "picasa"
+    gem.name = "rafaels-picasa"
     gem.description = %Q{Simple Google Picasa managment}
     gem.summary = %Q{simple google picasa managment}
     gem.email = "rafael@maisweb.org"
