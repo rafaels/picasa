@@ -21,7 +21,34 @@ Get all photos from album with album_id
 
 Get all photos from album object
 
-  user.albums.first.photos # returns all photos from first album
+  user.albums.first.photos
 
 Get all photos tagged with all given tags (tags separated by commas)
   user.photos_by_tag('ruby, rails')
+
+== Picasa::User
+
+The google user.
+
+  user = Picasa::User.new('google_username')
+
+== Picasa::Album
+
+The album object. It has the following attributes:
+
+  id, title, summary, photos_count, photo, thumbnail, google_user and photos
+
+Try it:
+
+  Picasa::Album.all('google_username')
+
+== Picasa::Photo
+
+Has the following attributes:
+
+  src, title, tags, thumbnail_1, thumbnail_2 and thumbnail_3
+
+so, you can call:
+
+  user.photos_by_tag('ruby').first.src
+
