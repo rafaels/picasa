@@ -8,6 +8,7 @@ module Picasa
     end
 
     def self.find_all_by_tags(google_user, tags)
+      tags = tags.gsub(' ', '')
       data = Picasa::Connection.stablish("/data/feed/api/user/#{google_user}/?kind=photo&tag=#{tags}")
       Photo.parse_all_xml(data)
     end

@@ -11,10 +11,17 @@ Only for public albums so far.
 
   user = Picasa::User.new('google_username')
 
-  albums = user.albums # returns user's public albums
+Get an array of albums
 
-  user.photos(:album_id => 1234567) # returns all photos from album with given id
+  user.albums
 
-  or you can call photos directly from an album
+Get all photos from album with album_id
 
-  albums.first.photos # returns all photos from first album
+  user.photos(:album_id => 1234567)
+
+Get all photos from album object
+
+  user.albums.first.photos # returns all photos from first album
+
+Get all photos tagged with all given tags (tags separated by commas)
+  user.photos_by_tag('ruby, rails')

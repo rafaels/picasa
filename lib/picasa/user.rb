@@ -13,5 +13,9 @@ module Picasa
       raise ArgumentError.new("You must specify album_id") unless options[:album_id]
       Picasa::Photo.find_all_by_album_id(@google_user, options[:album_id])
     end
+
+    def photos_by_tags(tags)
+      Picasa::Photo.find_all_by_tags(@google_user, tags)
+    end
   end
 end
